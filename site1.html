@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Gerador de Coisas Aleatórias</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff007f, #7f00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            color: #b0bec5;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .display-area {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 12px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            border-left: 5px solid #ff007f;
+            transition: all 0.3s ease;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: linear-gradient(45deg, #7f00ff, #ff007f);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(127, 0, 255, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 0, 127, 0.6);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        button.alt-btn {
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.4);
+        }
+
+        button.alt-btn:hover {
+            box-shadow: 0 6px 20px rgba(56, 239, 125, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Site Absurdamente Aleatório</h1>
+        <p class="subtitle">Clique nos botões abaixo para gastar alguns neurônios.</p>
+        
+        <div class="display-area" id="output">
+            Clique em um dos botões abaixo para gerar algo incrível (ou completamente inútil).
+        </div>
+
+        <div class="button-group">
+            <button onclick="gerarFato()">Fato Inútil</button>
+            <button class="alt-btn" onclick="gerarHistoria()">História Maluca</button>
+            <button onclick="mudarCor()">Mudar Clima</button>
+        </div>
+    </div>
+
+    <script>
+        const fatos = [
+            "As bananas são curvadas porque crescem em direção ao sol.",
+            "Antes do despertador ser inventado, existiam pessoas cuja profissão era acordar os outros soprando ervilhas na janela.",
+            "O som que você ouve quando estala os dedos é o som das bolhas de gás estourando nas suas articulações.",
+            "Wombats produzem fezes em formato de cubo para que elas não rolem penhasco abaixo.",
+            "Um grupo de flamingos é chamado de 'flamboyance'.",
+            "A primeira webcam do mundo foi criada na Universidade de Cambridge apenas para checar o nível de café em uma cafeteira sem precisar levantar da cadeira."
+        ];
+
+        const personagens = ["Um astronauta", "Um pinguim de gravata borboleta", "O seu Madruga", "Uma capivara filósofa", "Um robô com crise de identidade"];
+        const acoes = ["decidiu abrir uma padaria em Marte", "começou a dançar tango com uma vassoura", "ganhou na loteria usando números da sorte de um biscoito", "aprendeu a programar em Pascal", "viajou no tempo para salvar os dinossauros"];
+        const finais = ["porque estava entediado numa tarde de domingo.", "mas acabou esquecendo o porquê de ter começado.", "e virou tendência no TikTok no mesmo dia.", "deixando toda a vizinhança completamente perplexa.", "graças a um conselho que ouviu de um pato de borracha."];
+
+        const fundos = [
+            "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
+            "linear-gradient(135deg, #3a1c1c, #5d2525, #823030)",
+            "linear-gradient(135deg, #1d2671, #c33764)",
+            "linear-gradient(135deg, #11998e, #38ef7d)",
+            "linear-gradient(135deg, #000428, #004e92)",
+            "linear-gradient(135deg, #fc466b, #3f5efb)"
+        ];
+
+        function gerarFato() {
+            const index = Math.floor(Math.random() * fatos.length);
+            document.getElementById('output').innerText = fatos[index];
+            document.getElementById('output').style.borderLeftColor = "#ff007f";
+        }
+
+        function gerarHistoria() {
+            const p = personagens[Math.floor(Math.random() * personagens.length)];
+            const a = acoes[Math.floor(Math.random() * acoes.length)];
+            const f = finais[Math.floor(Math.random() * finais.length)];
+            
+            document.getElementById('output').innerText = `${p} ${a} ${f}`;
+            document.getElementById('output').style.borderLeftColor = "#38ef7d";
+        }
+
+        function mudarCor() {
+            const index = Math.floor(Math.random() * fundos.length);
+            document.body.style.background = fundos[index];
+        }
+    </script>
+</body>
+</html>
